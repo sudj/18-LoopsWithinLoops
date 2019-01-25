@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Daniel Su.
+"""  #DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -80,9 +80,31 @@ def draw_L(window, circle, r, c):
     and m and n are small, positive integers.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    for k in range(r):
+        circle.center.y = circle.center.y + 2*circle.radius
+        for j in range(3):
+            row_circle = rg.Circle(rg.Point(circle.center.x + 2*j*circle.radius, circle.center.y), circle.radius)
+            row_circle.fill_color = circle.fill_color
+            row_circle.attach_to(window)
+            window.render(0.1)
+    circle.center.y = circle.center.y + 2*circle.radius
+    circle.center.x = circle.center.x - 2*circle.radius
+    for l in range(c + 3):
+        circle.center.x = circle.center.x + 2*circle.radius
+        for h in range(3):
+            row_circle = rg.Circle(rg.Point(circle.center.x, circle.center.y + 2 * h * circle.radius), circle.radius)
+            row_circle.fill_color = circle.fill_color
+            row_circle.attach_to(window)
+            window.render(0.1)
+
+
+
+
+
+
 
 
 def run_test_draw_wall_on_right():
@@ -121,9 +143,21 @@ def draw_wall_on_right(rectangle, n, window):
     and n is a small, positive integer.
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    width = abs(rectangle.corner_1.x - rectangle.corner_2.x)
+    height = abs(rectangle.corner_1.y - rectangle.corner_2.y)
+    for k in range(n):
+        for j in range(k + 1):
+            rect_row = rg.Rectangle(rg.Point(rectangle.corner_1.x - (j * width), rectangle.corner_1.y), rg.Point(rectangle.corner_2.x - (j * width),rectangle.corner_2.y))
+            rect_row.attach_to(window)
+            window.render(0.1)
+        rectangle.corner_1.y = rectangle.corner_1.y + height
+        rectangle.corner_2.y = rectangle.corner_2.y + height
+
+
+
 
 
 # ----------------------------------------------------------------------
